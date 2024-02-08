@@ -15,14 +15,16 @@ class ApiController extends Controller
         
         // Validation des données
         $request->validate([
-            "name" => "required",
+            "nom" => "required",
+            "prenom" => "required",
             "email" => "required|email|unique:users",
             "password" => "required|confirmed"
         ]);
 
         // Modèle d'utilisateur
         User::create([
-            "name" => $request->name,
+            "nom" => $request->nom,
+            "prenom" => $request->prenom,
             "email" => $request->email,
             "password" => Hash::make($request->password)
         ]);

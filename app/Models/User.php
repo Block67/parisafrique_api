@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -52,5 +53,18 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
       return [];
+    }
+
+    public function retraits(): HasMany
+    {
+        return $this->hasMany(Retrait::class);
+    }
+
+    /**
+     * Get the recharges associated with the user.
+     */
+    public function recharges(): HasMany
+    {
+        return $this->hasMany(Recharge::class);
     }
 }
